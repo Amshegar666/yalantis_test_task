@@ -11,7 +11,7 @@ async function init() {
 
   const MAX = process.env.MAX_USER_LIMIT_FOR_SHUFFLE || 500;
   const MIN = process.env.MIN_USER_LIMIT_FOR_SHUFFLE || 3;
-  const SECRET = process.env.SECRET_CODE_FOR_SHUFFLE || 'shuffle_word';
+  const SECRET = process.env.SECRET_CODE_FOR_SHUFFLE || 'secretCode';
   const SESSION_SECRET = process.env.SESSION_SECRET || 'session_word';
 
   app.use(
@@ -44,7 +44,7 @@ async function init() {
 
   SwaggerModule.setup('api', app, document);
 
-  const PORT = process.env.PORT || 3001;
+  const PORT = process.env.PORT || 3000;
 
   await app.listen(PORT);
 }
