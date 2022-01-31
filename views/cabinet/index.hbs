@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>User Profile</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      {{#if access}}
+        <div class="row mb-3">
+          <div class="col">
+            {{#if result.error}}
+              <div class="row justify-content-md-center mt-5">
+                <div class="col-md-auto">
+                  <p class="fs-2 text-center text-danger">{{result.message}}</p>
+                </div>
+              </div>
+            {{/if}}
+            {{#if result.success}}
+              <div class="row justify-content-md-center mt-5">
+                <div class="col-md-auto">
+                  <p class="fs-2 text-center text-success">{{result.message}}</p>
+                </div>
+              </div>
+            {{/if}}
+            <div class="row justify-content-md-center mt-5">
+              <div class="col-md-auto">
+                <p class="fs-3 text-center">Hi {{login}}! <button type="submit" class="btn btn-dark" onclick="document.location.href='/exit'">Exit</button></p>
+                {{#unless gift10}}
+                  <button type="submit" class="btn btn-info mt-3" id="giftAddingButton" onclick="event.preventDefault();addGift()">Add Gift</button>
+                  <script>
+                    function addGift() {
+                      const htmlCollection = document.getElementsByClassName('gift');
+                      if (htmlCollection.length < 10) {
+                        const nextGiftNumber = htmlCollection.length+1;
+                        let giftDiv = document.createElement('div');
+                        giftDiv.className = "gift";
+                        giftDiv.innerHTML = "<label for='gift"+nextGiftNumber+"' class='form-label'>Gift "+nextGiftNumber+"</label><input class='form-control' id='gift"+nextGiftNumber+"' type='text' name='gift"+nextGiftNumber+"'>";
+                        gifts.append(giftDiv);
+                        if (nextGiftNumber == 10) {
+                          document.getElementById('giftAddingButton').remove();
+                        }
+                      }
+                    }
+                  </script>
+                {{/unless}}
+              </div>
+            </div>
+            <div class="row justify-content-md-center mt-5">
+              <div class="col col-lg-2"></div>
+              <div class="col-md-auto">
+                <form method="post" action="/update/{{id}}">
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input class="form-control" id="name" type="text" name="name" value="{{name}}">
+                      </div>
+                      <div class="mb-3">
+                        <label for="surname" class="form-label">Surname</label>
+                        <input class="form-control" id="surname" type="text" name="surname" value="{{surname}}">
+                      </div>
+                    </div>
+                    <div class="col" id="gifts">
+                      {{#if gift1}}
+                        <div class="mb-3 gift">
+                          <label for="gift1" class="form-label">Gift 1</label>
+                          <input class="form-control" id="gift1" type="text" name="gift1" value="{{gift1}}">
+                        </div>
+                      {{else}}
+                        <div class="mb-3 gift">
+                          <label for="gift1" class="form-label">Gift 1</label>
+                          <input class="form-control" id="gift1" type="text" name="gift1">
+                        </div>
+                      {{/if}}
+                      {{#if gift2}}
+                        <div class="mb-3 gift">
+                          <label for="gift2" class="form-label">Gift 2</label>
+                          <input class="form-control" id="gift2" type="text" name="gift2" value="{{gift2}}">
+                        </div>
+                      {{/if}}
+                      {{#if gift3}}
+                        <div class="mb-3 gift">
+                          <label for="gift1" class="form-label">Gift 3</label>
+                          <input class="form-control" id="gift3" type="text" name="gift3" value="{{gift3}}">
+                        </div>
+                      {{/if}}
+                      {{#if gift4}}
+                        <div class="mb-3 gift">
+                          <label for="gift4" class="form-label">Gift 4</label>
+                          <input class="form-control" id="gift4" type="text" name="gift4" value="{{gift4}}">
+                        </div>
+                      {{/if}}
+                      {{#if gift5}}
+                        <div class="mb-3 gift">
+                          <label for="gift5" class="form-label">Gift 5</label>
+                          <input class="form-control" id="gift5" type="text" name="gift5" value="{{gift5}}">
+                        </div>
+                      {{/if}}
+                      {{#if gift6}}
+                        <div class="mb-3 gift">
+                          <label for="gift6" class="form-label">Gift 6</label>
+                          <input class="form-control" id="gift6" type="text" name="gift6" value="{{gift6}}">
+                        </div>
+                      {{/if}}
+                      {{#if gift7}}
+                        <div class="mb-3 gift">
+                          <label for="gift7" class="form-label">Gift 7</label>
+                          <input class="form-control" id="gift7" type="text" name="gift7" value="{{gift7}}">
+                        </div>
+                      {{/if}}
+                      {{#if gift8}}
+                        <div class="mb-3 gift">
+                          <label for="gift8" class="form-label">Gift 8</label>
+                          <input class="form-control" id="gift8" type="text" name="gift8" value="{{gift8}}">
+                        </div>
+                      {{/if}}
+                      {{#if gift9}}
+                        <div class="mb-3 gift">
+                          <label for="gift9" class="form-label">Gift 9</label>
+                          <input class="form-control" id="gift9" type="text" name="gift9" value="{{gift9}}">
+                        </div>
+                      {{/if}}
+                      {{#if gift10}}
+                        <div class="mb-3 gift">
+                          <label for="gift10" class="form-label">Gift 10</label>
+                          <input class="form-control" id="gift10" type="text" name="gift10" value="{{gift10}}">
+                        </div>
+                      {{/if}}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <button type="submit" class="btn btn-primary mt-3">Save</button>
+                  </div>
+                </form>
+              </div>
+              <div class="col col-lg-2"></div>
+            </div>
+          </div>
+          <div class="col">
+            {{#if yourUserForSecretSanta}}
+              <div class="row justify-content-md-center mt-5">
+                <div class="col-md-auto">
+                  <p class="fs-2 text-center">Congratulations! Your are the Secret Santa of {{yourUserForSecretSanta.login}}</p>
+                </div>
+              </div>
+              <div class="row justify-content-md-center mt-5">
+                <p class="fs-4 text-center">Info about:</p>
+                <div class="col-md-auto">
+                  <p class="fst-italic text-center">{{yourUserForSecretSanta.name}}</p>
+                </div>
+                <div class="col-md-auto">
+                  <p class="fst-italic text-center">{{yourUserForSecretSanta.surname}}</p>
+                </div>
+              </div>
+              <div class="row justify-content-md-center mt-5">
+                <p class="fs-4 text-center">Gifts:</p>
+                {{#if yourUserForSecretSanta.gift1}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift1}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift2}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift2}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift3}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift3}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift4}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift4}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift5}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift5}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift6}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift6}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift7}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift7}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift8}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift8}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift9}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift9}}</p>
+                  </div>
+                {{/if}}
+                {{#if yourUserForSecretSanta.gift10}}
+                  <div class="col-md-auto">
+                    <p class="fst-italic text-center">{{yourUserForSecretSanta.gift10}}</p>
+                  </div>
+                {{/if}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      {{else}}
+        <div>Access denied</div>
+      {{/if}}
+    </div>
+  </body>
+</html>

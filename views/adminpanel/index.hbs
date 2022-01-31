@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Secret Santa Adminpanel</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-md-center mt-5">
+        <div class="col-md-auto">
+          <button type="submit" class="btn btn-primary mt-4" onclick="document.location.href='/'">Main page</button>
+        </div>
+      </div>
+      <div class="row justify-content-md-center mt-5">
+        <div class="col-md-auto">
+          <p class="fs-1 text-center">Current count of users: {{count}}</p>
+          <p class="fs-1 text-center">
+            Current status of shuffle: {{#if shuffled}}<span class="text-success">done</span>{{else}}<span class="text-danger">waiting</span>{{/if}}
+          </p>
+        </div>
+      </div>
+      <div class="row justify-content-md-center mt-5">
+        <div class="col col-lg-2"></div>
+        <div class="col-md-auto">
+          {{#unless shuffled}}
+            <form method="post" action="/shuffle">
+              <div class="mb-3">
+                <label for="code" class="form-label">Code</label>
+                <input class="form-control" id="code" type="text" name="code">
+              </div>
+              <button type="submit" class="btn btn-primary mt-5" onclick="document.location.href='/'">Shuffle</button>
+            </form>
+          {{/unless}}
+        </div>
+        <div class="col col-lg-2"></div>
+      </div>
+    </div>
+  </body>
+</html>
