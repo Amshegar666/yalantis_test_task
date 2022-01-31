@@ -4,6 +4,7 @@ import { validate } from 'class-validator';
 import { userSignDto } from '../../../Dto/userSignDto';
 import { UsersService } from '../../entities/users/users.service';
 import { ConfigService } from '../../entities/config/config.service';
+import { MAX } from '../../../config';
 
 @ApiTags('welcome')
 @Controller()
@@ -25,7 +26,7 @@ export class WelcomeController {
       shuffled = config.shuffled;
     }
     const users = await this.usersService.findAll();
-    const placesCountAvailable = 500 - users.length;
+    const placesCountAvailable = MAX - users.length;
     let regPermission = true;
     if (placesCountAvailable === 0) {
       regPermission = false;
@@ -130,7 +131,7 @@ export class WelcomeController {
     @Body() entityData: { login: string; password: string; signin: boolean },
   ): Promise<any> {
     const users = await this.usersService.findAll();
-    if (users.length === 500) {
+    if (users.length === MAX) {
       request.session.error = 'All places for participation are taken';
       request.session.header = 'Error';
       request.session.link = '/';

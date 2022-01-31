@@ -5,18 +5,14 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as session from 'express-session';
 import { join } from 'path';
 import { AppModule } from './app.module';
+import { MAX, MIN, SECRET } from './config';
 
 async function init() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  const MAX = process.env.MAX_USER_LIMIT_FOR_SHUFFLE || 500;
-  const MIN = process.env.MIN_USER_LIMIT_FOR_SHUFFLE || 3;
-  const SECRET = process.env.SECRET_CODE_FOR_SHUFFLE || 'secretCode';
-  const SESSION_SECRET = process.env.SESSION_SECRET || 'session_word';
-
   app.use(
     session({
-      secret: SESSION_SECRET,
+      secret: 'session_word',
       resave: false,
       saveUninitialized: false,
     }),
